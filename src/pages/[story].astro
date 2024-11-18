@@ -1,0 +1,82 @@
+---
+// src/pages/[story].astro
+import Layout from "../layouts/Layout.astro";
+import storiesData from "../data/stories.json";
+
+export function getStaticPaths() {
+  return storiesData.stories.map(story => ({
+    params: { story: story.link },
+    props: { title: story.title, description: story.description, story },
+  }));
+}
+const { story } = Astro.props;
+
+const {
+  url,
+  url_title,
+  short_title,
+  description,
+  role,
+  media_classes,
+  awards,
+  media
+} = story;
+
+const style = {
+  borderBottom: "1px dotted"
+};
+---
+
+<Layout>
+  <section class="flex-l">
+    <div class="w-30-l w-100 db">
+      <span class="dib dn-l mt0 mb3 pt2 pb2 ml2 mr2 f3">◇</span>
+      <h3 class="dn-l di serif f2 di mt0 mb3" style={style}>{short_title}</h3>
+      <span class="dib dn-l mt0 mb3 pt2 pb2 ml2 mr2 f3">◇</span>
+      <h5 class="sans-serif f5 mt0 mb1">Project Overview</h5>
+      <a class="normal dib no-underline mb1" target="_blank" rel="noopener noreferrer" style={style} href={url}>{url_title}</a>
+      {description.map(txt => <p class="mt2 sans-serif f5 lh-copy">{txt}</p>)}
+      <h5 class="sans-serif f5 mt3 mb1">Role</h5>
+      <p class="mt0 sans-serif f5 lh-copy">
+        {role}
+      </p>
+      {awards && (
+        <>
+          <h5 class="sans-serif f5 mt0 mb1">Awards/Nominations</h5>
+          <p class="mt0 sans-serif f5 lh-copy">{awards}</p>
+        </>
+      )}
+      <a 
+        href="/"
+        class="op--2 mt2 f5 primary bg-dark bg-animate bg-primary-hover dark-hover inline-flex items-center pa2 ba b--primary border-box br2">
+        <svg class="w1" data-icon="chevronLeft" viewBox="0 0 32 32" style={{fill: "currentcolor"}}>
+          <title>chevronLeft icon</title>
+          <path d="M20 1 L24 5 L14 16 L24 27 L20 31 L6 16 z"></path>
+        </svg>
+        <span class="pl1">Back</span>
+      </a>
+    </div>
+    <div class="w-70-l w-100 db pl5-l mt0-l mt4">
+      <span class="dn dib-l mt0 mb3 pt2 pb2 ml2 mr2 f3">◇</span>
+      <h3 class="di-l dn serif f2 mt0 mb3" style={style}>{short_title}</h3>
+      <span class="dn dib-l mt0 mb3 pt2 pb2 ml2 mr2 f3">◇</span>
+      <div class={media_classes || ""}>
+        {media && media.map(asset => (
+          asset.type === "video" ? (
+            <div class={`project-img mb2 ${asset.classes}`}>
+              <video muted autoplay loop playsinline poster={asset.poster}>
+                {asset.sources.map(src => <source src={src.src} type={src.type} />)}
+              </video>
+              {asset.caption && <p class="mt1 o-80 i serif f6">{asset.caption}</p>}
+            </div>
+          ) : (
+            <div class={`project-img mb2 ${asset.classes}`}>
+              <img src={asset.src} alt={asset.alt} />
+              {asset.caption && <p class="mt1 o-80 i serif f6">{asset.caption}</p>}
+            </div>
+          )
+        ))}
+      </div>
+    </div>
+  </section>
+</Layout>
