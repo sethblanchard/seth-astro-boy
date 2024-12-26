@@ -2,6 +2,7 @@
 // src/pages/index.astro
 import Layout from "../layouts/Layout.astro";
 import {stories} from "../data/stories.json"
+import { Scene } from "../components/Computer"
 // const stories = [
 //     // ... (keep the entire stories array as is)
 // ];
@@ -16,26 +17,43 @@ const spacerChar = "◇";
 ---
 
 <Layout>
-    <main class="flex-l">
-        <div class="w-30-l w-100 db">
-            <p class="sans-serif f5 lh-copy">
-                Seth is an engineer, director and journalist with 15+ years experience creating award winning web interactives and impactful products. Currently, he works as a Staff Engineer at Medallia, focused on new generative AI products. He is excited to apply his technical skills at the intersection of emerging technology and user interaction.
-            </p>
-            <div class="">
-                <h5 class="sans-serif f5 mt1 mb1">Contact</h5>
-                <a class="normal dib mb1 mr3 sans-serif f6 lh-copy" style={linkStyle} href="http://twitter.com/sethblanchard">@SethBlanchard</a>
-                <a class="normal dib sans-serif f6 lh-copy" style={linkStyle} href="mailto:blanchard.seth@gmail.com">blanchard.seth@gmail.com</a>
-            </div>
-        </div>
-        <section class="w-70-l w-100 db pl5-l mt0-l mt4 mb5">
-            <h3 class="serif f2 di mt1 mb1 pa1 o-60">Selected Projects: </h3>
-            {stories.map((storyData, index) => (
+	<div class="topper">
+		<div class="box">
+		  <img class="profile" src="data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAFwAAABcCAYAAADj79JYAAAAAXNSR0IArs4c6QAACYRJREFUeF7VXdly40gMS/7/ozNl17SLhnGwDznOPG0s9QWCIKjE2u+vr6+frz/67+fn5+v7+/vtu1fr3j5n/+oeb7v9c4CPg42DvAN4XLMCO9ZHwG/7q5/dfv6TgLPDjs9OgF/nwP++rcMCXQOCINdrHwG4SsVxOAYifpZ+VrrjwK0MrbLAxih21+Dcz7MiKR0AbpN3Ut+BnfQQr6+wmwE19v4CFqkXVU4wQPT8CXDFAAVoTTmX5gxopnkpVVnR7MoAnoFJgQJdrZECIBmu2LLCbhbpyk7UxI48sECoIorrJwY71jtC4Z5YsF4A7wDqpCJlBNuEmq8LvAM6yUJlJEoU0/B0vlp3WIG9A95lswMAN+5ScRyMMRs3ye5lLFPyleSFAaTkLklkItN9L0PDu6xVlsxFvqawWwfvS+xUzoNJhgtuB2AXZFYLFPjfN3qnwqNAdi7B6XYCckafu6Cz+5hWKx1W49EuTkuKS8EVdifmszkZ4zoMU8RBWarSoAKGc6naNiOPj06TVXHH3s41BrSqFY6l3exSc9Tawtjo1k5FEwPnAj6uvUhKAt+Btgsoam83EElWGAsds5msKIlkHajL6ifAOzZsFoRuELr3VVYxRjmtxtrRYbcsfv+7TpXJSmqefHg6dLo+G4xa3VGj01opE5ns1TWUM1HsZvJS9896AbpGau1XQEwbWZ0T550BvWp5Wn+Am0B07Jc1rAv4rNtAxqZDdq4r94Lpq2SFATn2icyun6fi6fT9JWO6gHcBSbqapMJpcGcPKtAMFAQyFUYVFJZ5cu5ZwBNglYXMyyJonQB1ga73dT25YzayXAFbCzmrE0/gzwKeDl+1cgZw1Ni6ybSmuq6aFyTFDLMH6KpbdnPfz1ifpSS2pYO7Ipb0N829cl0F3AUTC6WqXawIt4KADE+SkQ6uxv8G4KjnTD6waLJimby4ck+sIC/9is2Bzlj+W2Cje1Hp7nTXFVZXRFUQLODI1sT+5ARSdlx5XXWZyvKxYHXtYR37UpuuKpoVvN9mOAKgfmYOyrmYTmOEJLxEUmqx+gSwsUiyn6sEsExL3We3QF8K+CeA7dicgGcyhMCzTGa6/xh3WlJqE6B080qtdp48eeQkPc4yunNf2vg4i/QbQDtddraRnUP1KcosjDneAviJTvF0gNienEthjMYgsT1is1T9+HENx6h+EvCpw0RHwlyIkg7lWDCglwFeo3qaqSfmc5ZOdZYr7H6Z6+qiuetUlJNQoK+s17F83WcqToaeHl6dYE1Nt1WG18On1tml9wzwSatdh+3WofbwSoZ3QVd2ix1GOYUu41XhrLUHA1nb87o+7i/NfcfjtwB3BYk1E/UzBjqzZiwIDpSU5c59pLFjz8cBd0/kmCdOG1Usn5GMGS/OZMpZv66kjDkuBVyBOSML6kCpCUmBTBmD413RTGtd0vjsMJsVx67+P5gD3xibAmHyq4dJWtAK1rMcZbgCTrGJFR10Ogm43esu2zot+yi2ql7U67e1jgDOIt5lnqv6u2B2xid564LOCj1a3GOAK1a6VroLxk5x7K7B9BolzbXuyGIE/2nsqi1kzUDHl3ZAmLnnRFAZQMpmYleqwJWGYRXwymolC6x4dIvhDJBdWcI5cVxqatiZVQEdrEfJOqLhTL9mWHrqXgaYCxxja2qgVMNWu9FBKsb+LcDVM4Yd3VVZgUFRQHZBdz7+yTeXvwOvRsBJCQat3rsFeEdWZtiLB8WAurqh5MJZT7X/WgQRZNUAMQmhDmdXw11FfoqsaEwYyCwlmZNwDYaqFckGInBdW+iyva65xXC1CGOIkwTURZeSzvNXNqrOdwbwbkFkmahI0wZ8JpVqqnYkRQGOADp9Vz6ZMb0D+oxG14KJe3xxQkpSlF7iZh3LFdPRHSidxcqPEqWC6Yq2chluLgVizcRkFMYc9uUGXf3qsDiluAKXWTfMoOSf2dyM5UzKkL0KkxTkx7jOnyt3WOzSVGkhY/apuuD0nBXglD1Jzx3pnowB+4P8LrO7gVCFjvndBAY7GPPkzCYi05k8skA5SUl1BbGk34BwBbIjH+wel9YsHZNMdAqzamDY3LHYhWfmSlJwDy/vS0msnQVcVfCqzUn/VljPegBWD9j+mBdXLsgxvFpDquEnmc0C5wpjx7vPBFs5oY48IODKIuIZkzG4B6C+L2WX3SxgqvKjP2Y6nADeGcM0fgVoVu9w31XC6AtqZoFXmeEyZqbqq3RmKZsCyaQMddbJYAqKW/+2zrGvDTIHoBjvAFR2jtm2pP2qGCtWpsCyccrpKAfWbu1VejutrrqsGg2ltUlO0nXGWgwmAlwB7WSt03bG9Ptnu08LZzamioyybwnUdF05iMRkJErKiM79D2LtAj4O7TTZAaOkqCMtbF7FWlXIuiRQxR89vSrGj/MwwFfsoSq0qQA79jiNTsVJjWXORhVNViATNum89kWRKWXThpTG4eeVzXVO1NQuyLPNyJiX1RzGbHZuluk0AyvDU3Q6AZi9B5k4U8gqUCy4juUs6MxxMMnonpHhKV8U2Zk0pVd3DqWv+HmXbSwz6lwIorrG1mduCxnviBt9eLJ9HVDZPR2P3Amoc0lpb0rP07gdJWh3mqtFMYGt2nOVyqzIMs1W8yKbXWFWbFbM7xCk/d7Cat9cE5PY4QoTK4qqQCkbmpwNk696Nrf/FICUbU+tvYsaK05KTxPgFZDkJsZcqlHB8cwDpwB0MkGdSRGv4vUSBPX+8Cu0uwu2A+7RsZW/c1kBekZaEolmiGHfzMlkZJXZVUqQAXXDGBT1M2tWusAoWVkdz+arUlgxo7+1RwnZqcpjM5jaXTlh7OkG6BSAO/Og7EQf3qm8nQ0xwJM1xCLKMmNHg1XgOudZueepaDq7pSbvMr8D7Gqa7+o3C+oKmN0xrcezXWBx0eRxu9cTqCdY3gVs977W/1ZmdpFkxdR8rglCr7za7Li1sbDPnrtzv2ztr2B1Vzb+EmM7INd7jjE8sVo9t1iVladDGE8+C8jV97c0PG0igZ3Gf+L1q7LMNj4JiBNAp4OlBieNT2d49/Vlhp8A+92HXV3vZFCnAb8C6JMHWgXVjavd4u75pwDfXewKMK6e0z0RXFm7Bfg7gP40liOr8RHxKiYW8NVJlyI/+b6TlTW6Y05KyEvv4b5U1d3g6n2fxupxjvSLjdXz3sbJx7M7k3bGzj6e7cx54p703GZ3jRcfvjthGp+K0G+y/h0keHqWksA6cT0BfmKNlTmuZvbY0z+QqbUrT37VFAAAAABJRU5ErkJggg==" />
+		</div>
+		<h1 class="hero-text">
+		  <span>S</span>
+		  <span>e</span>
+		  <span>t</span>
+		  <span>h</span>
+		  <br />
+		  <span>B</span>
+		  <span>l</span>
+		  <span>a</span>
+		  <span>n</span>
+		  <span>c</span>
+		  <span>h</span>
+		  <span>a</span>
+		  <span>r</span>
+		  <span>d</span>
+		</h1>
+		</div>
+		<h1 style="display:none;">◇</h1>
+		<div class="projects mt2">
+		   <h2 class="projects-header">About</h2>
+		  <p>Seth is an engineer, director and journalist with 15+ years experience creating award winning web interactives and impactful products. Currently, he works as a Staff Engineer at Medallia, leading a team focused on new generative AI products. He thrives when applying his technical expertise at the intersection of emerging technologies and user experience.</p>
+		</div>
+		<div class="projects">
+		  <div class="project-list">
+			<h2 class="projects-header">Projects</h2>
+			<div class="mt3">
+			{stories.map((storyData, index) => (
                 <>
-                    {index > 0 && <span class="dib mt1 mb1 pt2 pb2 ml2 mr2 f3">{spacerChar}</span>}
-                    <h3 class="serif f2 di mt1 mb1">
+                    <div class="project-list-item f3">
                         <a 
                             href={`./${storyData.link}`}
                             style={{
+								display:"inlineBlock",
                                 color: "#e9585d",
                                 borderBottom: "1px dotted",
                                 cursor: "pointer",
@@ -44,9 +62,18 @@ const spacerChar = "◇";
                         >
                             {storyData.short_title}
                         </a>
-                    </h3>
+                    </div>
                 </>
             ))}
-        </section>
-    </main>
+			</div>
+		  </div>
+		  <div class="project-preview">
+		  </div>
+		</div>
+		<div style="width:750px; height:750px;">
+			<Scene  client:only="react" />
+		</div>
+		<footer class="footer">
+		 ↑ up | down ↓ | select ⏎  
+		</footer>
 </Layout>

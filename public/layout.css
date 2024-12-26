@@ -142,3 +142,119 @@ a.normal{
   grid-template-rows: repeat(12, 1fr);
   grid-gap: 15px;
 }
+
+
+:root{
+  --primary: #e9585d;
+  --secondary: #8eb4c6;
+  --dark: #333647
+}
+
+/* @media (prefers-color-scheme: dark) { */
+html{
+  background: #333647;
+  color:#e9585d;
+}
+
+@font-face {
+  font-family: 'Departure Mono';
+  src: url('https://assets.codepen.io/605876/DepartureMono-Regular.woff');
+}
+
+@font-face {
+  font-family: 'virture';
+  src: url('https://gazs.github.io/canvas-atkinson-dither/virtue.ttf')
+}
+
+html{
+    font-family: 'Departure Mono', monospace;
+}
+
+.sans{
+    font-family: -apple-system,BlinkMacSystemFont,avenir next,avenir,helvetica neue,helvetica,ubuntu,roboto,noto,segoe ui,arial,sans-serif;
+}
+
+.serif{
+  font-family: georgia,times,serif;
+}
+
+.topper{
+  display:flex;
+  flex-direction:row
+}
+
+h1{
+  font-size: 3.75em;
+  font-weight: bold;
+  margin-left:20px
+/*   text-align: center; */
+}
+
+.box{
+  width:200px;
+  height:200px;
+  background:#e9585d;
+  background-image: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' stroke='%23e9585d' stroke-width='20' stroke-dasharray='1%2c 29' stroke-dashoffset='0' stroke-linecap='square'/%3e%3c/svg%3e");
+/*     transform: rotate(45deg); */
+  overflow:hidden;
+}
+
+.profile{
+  width:120%;
+  margin:-8% -8%;
+/*   transform:rotate(-45deg); */
+  mix-blend-mode: multiply;
+}
+
+.projects{
+  border: solid 1px;
+  position:relative;
+  padding:20px;
+  display:flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.projects-list{
+  margin-top:20px;
+  margin-right: 20px;
+  flex-grow:1;
+}
+
+.project-list-item{
+  margin-bottom:10px;
+  position:relative;
+}
+
+.project-list-item:hover:before,
+.project-list-item:focus:before{
+  content:" ";
+  width:10px;
+  height:10px;
+  display: inline-block;
+  background: #e9585d;
+  transform:rotate(-45deg);
+  position:absolute;
+  left: -15px;
+  top:4px;
+    
+}
+
+.projects-header {
+  position:absolute;
+  top:-45px;
+  left:40px;
+  background: #333647;
+  padding:10px;
+}
+
+.project-preview{
+  border: solid 1px;
+  height: 200px;
+  width: 200px;
+  align-self: flex-end;
+}
+
+.footer{
+  margin: 10px 0px;
+}
