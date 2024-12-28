@@ -94,7 +94,24 @@
       "uri": "scene.bin"
     }
   ],
-  
+  "images": [
+    {
+      "uri": "Mac.Tri.Baked_baseColor.png"
+    }
+  ],
+  "materials": [
+    {
+      "doubleSided": true,
+      "name": "Mac.Tri.Baked",
+      "pbrMetallicRoughness": {
+        "baseColorTexture": {
+          "index": 0
+        },
+        "metallicFactor": 0.0,
+        "roughnessFactor": 0.9524317154
+      }
+    }
+  ],
   "meshes": [
     {
       "name": "Mac_Tri_Baked_Mac.Tri.Baked_0",

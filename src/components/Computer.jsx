@@ -7,16 +7,15 @@ Title: Macintosh Classic (1991)
 */
 
 import React, { useRef } from 'react'
-import { useGLTF } from '@react-three/drei'
+import { useGLTF, Center, CameraControls } from '@react-three/drei'
 import { Canvas } from '@react-three/fiber'
 
 export const  Computer = (props) => {
   useGLTF.preload('/scene.gltf')
-
-  const { nodes, materials } = useGLTF('/scene.gltf')
+  const { nodes } = useGLTF('/scene.gltf')
   return (
     <group {...props} dispose={null}>
-      <group rotation={[-Math.PI / 2, 0, 0]} scale={0.001}>
+      <group rotation={[-Math.PI / 2, 0, 0]} scale={0.004}>
         <group rotation={[Math.PI / 2, 0, 0]}>
           <mesh
             castShadow
@@ -24,7 +23,10 @@ export const  Computer = (props) => {
             geometry={nodes.Mac_Tri_Baked_MacTriBaked_0.geometry}
             // material={materials['Mac.Tri.Baked']}
             position={[-371.19, 0, 0]}
-          />
+          >
+            <meshBasicMaterial color='#e9585d' wireframe linewidth="1" />
+            {/* <meshNormalMaterial wireframe blendColor="0xe9585d" /> */}
+          </mesh>
         </group>
       </group>
     </group>
@@ -34,9 +36,11 @@ export const  Computer = (props) => {
 export const Scene = () =>{
   console.log('Scene loaded')
 return (
-  <div id="canvas-container">
-          <Canvas>
-      <Computer />
+  <div id="canvas-container" style={{width:"500px",height:"500px", border:"solid 1px #e9585d"}}>
+    <Canvas>
+            <Center>
+              <Computer />
+            </Center><CameraControls />
     </Canvas>
     </div>
 )
